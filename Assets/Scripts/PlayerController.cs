@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
 
     // Private Variables
 
-
     void Awake()
     {
         /* Singleton */
@@ -28,6 +27,7 @@ public class PlayerController : MonoBehaviour
         }
         /* End of Singleton */
     }
+
     // Start is called before the first frame update
     void Start()
     {
