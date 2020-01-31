@@ -8,6 +8,13 @@ public class AudioController : MonoBehaviour
     private static AudioController instance;
     public static AudioController Instance { get { return instance; } }
 
+    // Class References
+
+    // Public Variables
+
+    // Private Variables
+
+
     void Awake()
     {
         /* Singleton */

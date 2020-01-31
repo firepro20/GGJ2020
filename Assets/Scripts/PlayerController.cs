@@ -8,6 +8,13 @@ public class PlayerController : MonoBehaviour
     private static PlayerController instance;
     public static PlayerController Instance { get { return instance; } }
 
+    // Class References
+
+    // Public Variables
+
+    // Private Variables
+
+
     void Awake()
     {
         /* Singleton */

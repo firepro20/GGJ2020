@@ -8,6 +8,14 @@ public class GameController : MonoBehaviour
     private static GameController instance;
     public static GameController Instance { get { return instance; } }
 
+    // Class References
+
+    // Public Variables
+
+    // Private Variables
+    bool gameRunning;
+    bool gameStarted; // when player gets control
+
     void Awake()
     {
         /* Singleton */
@@ -24,12 +32,27 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameRunning = true;
+        gameStarted = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (gameRunning)
+        {
+            // show menu
+            ShowMenu(gameRunning);
+        }
+        if (gameStarted)
+        {
+            
+        }
+    }
+
+    // Calls Main Menu
+    private void ShowMenu()
+    {
+
     }
 }
