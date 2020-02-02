@@ -75,7 +75,7 @@ public class FrontShellController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Bullet") || collision.gameObject.CompareTag("Pickup"))
         {
             Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), collision.gameObject.GetComponent<Collider>(), true);
             return;
@@ -86,8 +86,6 @@ public class FrontShellController : MonoBehaviour
         }
 
         DestroyShell();
-
-
     }
 
     private bool OnScreenCheck()

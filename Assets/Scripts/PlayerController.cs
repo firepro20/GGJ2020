@@ -163,8 +163,10 @@ public class PlayerController : MonoBehaviour
             {
                 AudioController.Instance.PlayCharge();
                 // further steps need to be added when weapon powerup is picked, switch \ if clauses
-                frontProjectile = Instantiate(frontShell, frontTurret.transform.position + (bulletOffset * frontTurret.transform.forward), frontTurret.transform.rotation);
-                rearProjectile = Instantiate(rearShell, rearTurret.transform.position + (bulletOffset * -rearTurret.transform.forward), rearTurret.transform.rotation);
+                if (frontTurret.gameObject.activeInHierarchy)
+                    frontProjectile = Instantiate(frontShell, frontTurret.transform.position + (bulletOffset * frontTurret.transform.forward), frontTurret.transform.rotation);
+                if (rearTurret.gameObject.activeInHierarchy)
+                    rearProjectile = Instantiate(rearShell, rearTurret.transform.position + (bulletOffset * -rearTurret.transform.forward), rearTurret.transform.rotation);
                 // We can now use GetTurretRotation() for the y value, the new angle. However we will need to specify the angle our selves.
                 nextFire = Time.time + 1 / rateOfFire;
                 AudioController.Instance.PlayShot();

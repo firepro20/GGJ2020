@@ -7,6 +7,8 @@ TagManager:
   - Environment
   - Enemy
   - Ground
+  - Pickup
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -16,7 +18,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Background
   - 
   - 
   - 
