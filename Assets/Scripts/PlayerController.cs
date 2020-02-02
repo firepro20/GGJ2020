@@ -19,13 +19,20 @@ public class PlayerController : MonoBehaviour
     public RectTransform crosshair;
     public Turret frontTurret;
     public Turret rearTurret;
+    public GameObject frontShell;
+    public GameObject rearShell;
     public GameObject TireBL;
     public GameObject TireBR;
     public GameObject TireFL;
     public GameObject TireFR;
 
-    // Private Variables
     public float speed = 0.0f;
+    public float rateOfFire = 2f;
+
+    // Private Variables
+    private float nextFire = 0f;
+    private GameObject frontProjectile;
+    private GameObject rearProjectile;
 
     void Awake()
     {
@@ -79,7 +86,7 @@ public class PlayerController : MonoBehaviour
             else
                 speed = 0.0f;
         }
-        
+
         //Clamp the speed
         speed = Mathf.Clamp(speed, -maxSpeed, maxSpeed);
         //Compute a vector in the up direction of length speed
@@ -94,6 +101,7 @@ public class PlayerController : MonoBehaviour
         //  ActivateBoost();
 
         MoveCrosshair();
+        Fire();
     }
 
     private void RotateTires()
@@ -143,5 +151,24 @@ public class PlayerController : MonoBehaviour
         }
 
         return rotationY;
+    }
+
+
+    private void Fire()
+    {
+        float bulletOffset = 5f;
+        if (Input.GetMouseButton(0)) // no, this is incorrect, it should be onpress
+        {
+            if (Time.time > nextFire && Time.timeScale != 0)
+            {
+                AudioController.Instance.PlayCharge();
+                // further steps need to be added when weapon powerup is picked, switch \ if clauses
+                frontProjectile = Instantiate(frontShell, frontTurret.transform.position + (bulletOffset * frontTurret.transform.forward), frontTurret.transform.rotation);
+                rearProjectile = Instantiate(rearShell, rearTurret.transform.position + (bulletOffset * -rearTurret.transform.forward), rearTurret.transform.rotation);
+                // We can now use GetTurretRotation() for the y value, the new angle. However we will need to specify the angle our selves.
+                nextFire = Time.time + 1 / rateOfFire;
+                AudioController.Instance.PlayShot();
+            }
+        }
     }
 }
