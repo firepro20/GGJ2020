@@ -12,6 +12,7 @@ public class AudioController : MonoBehaviour
 
     // Public Variables
     public AudioClip shellExplosionClip;
+    public AudioClip enemyShotClip;
     public AudioClip shotClip;
     public AudioClip shotChargeClip;
     public AudioClip tankExplosion;
@@ -55,7 +56,12 @@ public class AudioController : MonoBehaviour
 
     public void PlayShot()
     {
-        mainAudioSource.PlayOneShot(shotClip, volumeLevel);
+        mainAudioSource.PlayOneShot(shotClip, 0.5f);
+    }
+
+    public void PlayEnemyShot()
+    {
+        mainAudioSource.PlayOneShot(enemyShotClip, volumeLevel);
     }
 
     public void PlayShellExplosion()
