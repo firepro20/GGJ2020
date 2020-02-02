@@ -8,12 +8,12 @@ public class Player : MonoBehaviour
     enum Meshes { BODY = 0, FARMOR = 1 };
 
     //Functional Components
-    GameObject thruster;
+    public GameObject thruster;
     public GameObject frontArmor;
-    GameObject leftSpikes;
-    GameObject rightSpikes;
-    GameObject frontTurret;
-    GameObject backTurret;
+    public GameObject leftSpikes;
+    public GameObject rightSpikes;
+    public GameObject frontTurret;
+    public GameObject backTurret;
 
     //Aesthetic Components
     GameObject roof;
@@ -25,7 +25,6 @@ public class Player : MonoBehaviour
     void Start()
     {
         controller = PlayerController.Instance;
-        //frontArmor.SetActive(false);
     }
 
     // Update is called once per frame
@@ -47,7 +46,7 @@ public class Player : MonoBehaviour
             Vector3 normal = hit.normal;
 
             if (normal == transform.forward && frontArmor.activeInHierarchy) //Front
-                collision.gameObject.SetActive(false);
+                collision.gameObject.GetComponent<Enemy>().Death();
             else if (normal == -transform.forward) //Back
                 Debug.Log("Hit Trunk");
             else if (normal == transform.right) //Right

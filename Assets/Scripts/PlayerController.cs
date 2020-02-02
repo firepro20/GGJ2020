@@ -15,9 +15,14 @@ public class PlayerController : MonoBehaviour
     public float acceleration = 10.0f;
     public float brake = 5.0f;
     public float maxSpeed = 10.0f;
+
     public RectTransform crosshair;
     public Turret frontTurret;
     public Turret rearTurret;
+    public GameObject TireBL;
+    public GameObject TireBR;
+    public GameObject TireFL;
+    public GameObject TireFR;
 
     // Private Variables
     public float speed = 0.0f;
@@ -82,12 +87,25 @@ public class PlayerController : MonoBehaviour
 
         //Move the player object
         transform.Translate(velocity * Time.deltaTime, Space.Self);
+        RotateTires();
 
         //Press LShift to activate the turbo boost
         //if (Input.GetKeyDown(KeyCode.LeftShift))
         //  ActivateBoost();
 
         MoveCrosshair();
+    }
+
+    private void RotateTires()
+    {
+        Quaternion newRotation = Quaternion.AngleAxis(speed * 0.2f, Vector3.right);
+        TireBL.transform.rotation *= newRotation;
+
+        newRotation = Quaternion.AngleAxis(-speed * 0.2f, -Vector3.right);
+        TireBR.transform.rotation *= newRotation;
+
+        TireFL.transform.rotation *= newRotation;
+        TireFR.transform.rotation *= newRotation;
     }
 
     // Moves crosshair and rotates turrets
