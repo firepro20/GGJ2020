@@ -3597,6 +3597,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3145648056588483198, guid: 1327d1e8b13c2ba4eb5cf7b9341156c9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5615343439339012025, guid: 1327d1e8b13c2ba4eb5cf7b9341156c9,
         type: 3}
       propertyPath: m_Name
@@ -3640,7 +3645,7 @@ PrefabInstance:
     - target: {fileID: 5615717011659130462, guid: 1327d1e8b13c2ba4eb5cf7b9341156c9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5615717011659130462, guid: 1327d1e8b13c2ba4eb5cf7b9341156c9,
         type: 3}
@@ -3661,6 +3666,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: textured tire B L
+      objectReference: {fileID: 0}
+    - target: {fileID: 8327579692363269396, guid: 1327d1e8b13c2ba4eb5cf7b9341156c9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8913838650976465997, guid: 1327d1e8b13c2ba4eb5cf7b9341156c9,
         type: 3}
@@ -4902,6 +4912,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 3838441747546472938, guid: e4a6e5f265f8eb548a5ba8feba61827a,
+        type: 3}
+      propertyPath: hp
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9093702395786297441, guid: e4a6e5f265f8eb548a5ba8feba61827a,
         type: 3}

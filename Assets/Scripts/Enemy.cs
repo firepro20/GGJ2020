@@ -6,10 +6,12 @@ public class Enemy : MonoBehaviour
 {
     private Animator animator;
     private bool isAlive;
+    public int hp;
 
     void Awake()
     {
         animator = GetComponent<Animator>();
+        hp = 2;
     }
 
     // Update is called once per frame
@@ -21,6 +23,7 @@ public class Enemy : MonoBehaviour
     private void OnEnable()
     {
         isAlive = true;
+        hp = 2;
         animator = GetComponent<Animator>();
         animator.SetBool("Die", false);
         gameObject.GetComponent<BoxCollider>().enabled = true;
@@ -32,6 +35,13 @@ public class Enemy : MonoBehaviour
             StartCoroutine(DeathAnimation());
     }
 
+    public void BulletHit()
+    {
+        hp--;
+        if (hp == 0)
+            Death();
+    }
+
     private IEnumerator DeathAnimation()
     {
         if (!gameObject.activeInHierarchy)
@@ -41,5 +51,6 @@ public class Enemy : MonoBehaviour
         gameObject.GetComponent<BoxCollider>().enabled = false;
         yield return new WaitForSeconds(3);
         gameObject.SetActive(false);
+        isAlive = false;
     }
 }

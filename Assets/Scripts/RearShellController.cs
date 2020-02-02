@@ -80,6 +80,10 @@ public class RearShellController : MonoBehaviour
             Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), collision.gameObject.GetComponent<Collider>(), true);
             return;
         }
+        else if (collision.gameObject.CompareTag("Enemy"))
+        {
+            collision.gameObject.GetComponent<Enemy>().BulletHit();
+        }
 
         DestroyShell();
 
