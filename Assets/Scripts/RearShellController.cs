@@ -42,7 +42,6 @@ public class RearShellController : MonoBehaviour
         // This is not a permanent solution as there may be times this will not work. To improve later
         if (!OnScreenCheck()) // we put this here as there was a bug were this was destroying object before instantiating, because
         {
-            Debug.Log("I am not on screen anymore!");
             DestroyShell();
             //Destroy(gameObject, shellTTL);
         }   // render on camera is off before initiating.
@@ -76,7 +75,6 @@ public class RearShellController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("I am " + collision.gameObject.name + " calling from " + gameObject.name);
         if (collision.gameObject.CompareTag("Player"))
         {
             Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), collision.gameObject.GetComponent<Collider>(), true);
