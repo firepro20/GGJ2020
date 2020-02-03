@@ -16,12 +16,6 @@ public class EnemyShellController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (GameObject enemy in enemies)
-        {
-            Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), enemy.GetComponent<Collider>());
-        }
-
         shellRigidbody = GetComponent<Rigidbody>();
         shellRigidbody.velocity = transform.forward * shellSpeed;       
     }
@@ -49,7 +43,11 @@ public class EnemyShellController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), collision.collider, true);
+            return;
+        }
         DestroyShell();
     }
 

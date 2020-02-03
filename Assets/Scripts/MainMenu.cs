@@ -16,14 +16,14 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
-        
+        Cursor.visible = true;
     }
 
     // Start is called before the first frame update
     void Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
-        
+        StopAllCoroutines();
         
     }
 
@@ -36,18 +36,25 @@ public class MainMenu : MonoBehaviour
     // Calls the LoadScene Coroutine to allow delay for button click playback
     public void LoadGame()
     {
-        StartCoroutine("LoadScene");
+        audioSource.PlayOneShot(buttonClick);
+        SceneManager.LoadScene("Game");
     }
     
     // Loads Controls, toggles Main Menu on/off
     public void ShowControls()
     {
-        StartCoroutine("ToggleControls");        
+        audioSource.PlayOneShot(buttonClick);
+        // Load Controls and disables menu
+        mainMenu.gameObject.SetActive(false);
+        controlsMenu.gameObject.SetActive(true);
     }
 
     public void ShowMenu()
     {
-        StartCoroutine("ToggleMenu");
+        audioSource.PlayOneShot(buttonClick);
+        // Load Controls and disables menu
+        controlsMenu.gameObject.SetActive(false);
+        mainMenu.gameObject.SetActive(true);
     }
 
     public void ExitGame()
@@ -57,35 +64,4 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
 #endif
     }
-    private IEnumerator LoadScene()
-    {
-        audioSource.PlayOneShot(buttonClick);
-        yield return new WaitForSeconds(0.5f);
-
-        // Load Game Scene which should be index 1
-        SceneManager.LoadScene(1);
-    }
-
-    private IEnumerator ToggleControls()
-    {
-        audioSource.PlayOneShot(buttonClick);
-        yield return new WaitForSeconds(0.25f);
-
-        // Load Controls and disables menu
-        mainMenu.gameObject.SetActive(false);
-        controlsMenu.gameObject.SetActive(true);
-    }
-    private IEnumerator ToggleMenu()
-    {
-        audioSource.PlayOneShot(buttonClick);
-        yield return new WaitForSeconds(0.25f);
-
-        // Load Controls and disables menu
-        controlsMenu.gameObject.SetActive(false);
-        mainMenu.gameObject.SetActive(true);
-
-    }
-
-
-
 }

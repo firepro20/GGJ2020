@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 {
     PlayerController controller;
     GameController gc;
-    enum Meshes { BODY = 0, FARMOR = 1, LSPIKES = 2, RSPIKES = 3, FTURRET = 4, BTURRET = 5, THRUST = 6, ROOF = 7, HOOD = 8, TRUNK = 9 };
+    enum Meshes { BODY = 0, FARMOR = 1, LSPIKES = 2, RSPIKES = 3, THRUST = 4, ROOF = 5, HOOD = 6, TRUNK = 7, FTURRET = 8, BTURRET = 9 };
     bool[] activeComponents;
     public GameObject[] carComponents;
     public TextMeshProUGUI componentsText;
@@ -19,17 +19,12 @@ public class Player : MonoBehaviour
         gc = GameController.Instance;
 
         //Activate all components
-        //for (int i = 0; i < 10; i++)
-        //  carComponents[i].SetActive(true);
-        //DEBUG
-        carComponents[(int)Meshes.FARMOR].SetActive(false);
+        for (int i = 0; i < 10; i++)
+          carComponents[i].SetActive(true);
 
         activeComponents = new bool[10];
         for (int i = 0; i < 10; i++)
             activeComponents[i] = true;
-
-        //DEBUG
-        activeComponents[(int)Meshes.FARMOR] = false;
 
         UpdateText();
     }
@@ -99,6 +94,10 @@ public class Player : MonoBehaviour
                     TakeDamage();
             }
         }
+        else if (collision.gameObject.CompareTag("EnemyBullet"))
+        {
+            TakeDamage();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -106,6 +105,7 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("Pickup"))
         {
             PickupLoot();
+            gc.DecreaseBagCount();
             Destroy(other.gameObject);
         }
     }
@@ -128,10 +128,17 @@ public class Player : MonoBehaviour
 
         do //Look for a component to destroy
         {
-            index = Random.Range(1, 10);
+            if (count >= 4)
+                index = Random.Range(1, 8);
+            else if (count == 3)
+                index = (int)Meshes.BTURRET;
+            else
+                index = (int)Meshes.FTURRET;
+            
+            //index = Random.Range(1, 10);
         } while (!activeComponents[index]);
 
-        Debug.Log("Removed: " + ((Meshes)index).ToString());
+        //Debug.Log("Removed: " + ((Meshes)index).ToString());
         activeComponents[index] = false;
         carComponents[index].SetActive(false);
         UpdateText();
@@ -151,7 +158,6 @@ public class Player : MonoBehaviour
 
     private void PickupLoot()
     {
-        Debug.Log("Picked up");
         int index;
         int count = 0;
         for (int i = 0; i < 10; i++)
@@ -161,7 +167,7 @@ public class Player : MonoBehaviour
         }
         if (count == 10)
         {
-            Debug.Log("You already have all components");
+            //Debug.Log("You already have all components");
             return;
         }
 

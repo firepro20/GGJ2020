@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI gameTimeText;
     public GameObject pickupBag;
     public int pickupRespawnCount;
+    public GameObject gameOverUI;
+    public GameObject menuUI;
+    public TextMeshProUGUI scoreText;
 
     // Private Variables
     private float gameTime;
@@ -37,6 +41,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         gameTimeText.text = "0";
         gameTime = 0.0f;
         respawnTimer = 10.0f;
@@ -48,7 +53,8 @@ public class GameController : MonoBehaviour
         UpdateText();
 
         //Respawn Loot
-        respawnTimer -= Time.deltaTime;
+        if (bagsCounter < 50)
+            respawnTimer -= Time.deltaTime;
         if (respawnTimer <= 0)
         {
             CreateLoot(pickupRespawnCount);
@@ -58,13 +64,20 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
-        Debug.Log("Game Over");
+        Time.timeScale = 0;
+        scoreText.text = "Your Time: " + gameTimeText.text;
+        gameOverUI.gameObject.SetActive(true);
+    }
+
+    public void PlayAgain()
+    {
+        SceneManager.LoadScene("Game");
     }
 
     private void UpdateText()
     {
         float hrs, min, sec;
-        gameTime = Time.time;
+        gameTime = Time.timeSinceLevelLoad;
 
         hrs = Mathf.Floor(gameTime / 3600);
         min = Mathf.Floor((gameTime % 3600) / 60);
@@ -81,8 +94,36 @@ public class GameController : MonoBehaviour
         {
             Vector3 newPosition = new Vector3(Random.Range(-340.0f, 340.0f), 1.52f, Random.Range(-290.0f, 290.0f));
             Vector3 newRotation = Vector3.zero;
-            GameObject.Instantiate(pickupBag, newPosition, Quaternion.Euler(newRotation));
+            if (bagsCounter < 50)
+            {
+                GameObject.Instantiate(pickupBag, newPosition, Quaternion.Euler(newRotation));
+                bagsCounter++;
+            }       
         }
-        bagsCounter += amount;
+    }
+
+    public void DecreaseBagCount()
+    {
+        bagsCounter--;
+    }
+
+    public void OpenMenu()
+    {
+        Time.timeScale = 0;
+        menuUI.SetActive(true);
+        Cursor.visible = true;
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        menuUI.SetActive(false);
+        Cursor.visible = false;
+    }
+
+    public void BackToMenu()
+    {
+        menuUI.SetActive(false);
+        SceneManager.LoadScene("Main Menu");
     }
 }
