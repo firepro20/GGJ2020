@@ -97,7 +97,7 @@ public class Enemy : MonoBehaviour
         
         animator.SetBool("Die", true);
         yield return new WaitForSeconds(3);
-        gameObject.SetActive(false);
+        gameObject.transform.parent.gameObject.SetActive(false);
         
     }
 

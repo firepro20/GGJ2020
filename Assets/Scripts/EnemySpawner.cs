@@ -11,8 +11,6 @@ public class EnemySpawner : MonoBehaviour
     public Transform enemyParent;
     public float spawnInterval = 3f;
     public float currentSpawnTime = 0;
-    public float bigCountdown = 120; // 120 seconds is 2 minutes
-    public float currentBigTime = 0;
 
     public float minSpawnRadius = 80f;
     public float maxSpawnRadius = 120f;
@@ -43,13 +41,9 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Move to position of player for close quarter spawning
         
-
-        // Somewhere I need to include initial spawn
-
         currentSpawnTime += Time.deltaTime;
-        currentBigTime += Time.deltaTime;
+        
 
         if (currentSpawnTime >= spawnInterval)
         {
@@ -57,16 +51,8 @@ public class EnemySpawner : MonoBehaviour
             currentSpawnTime = 0;
         }
 
-        if (currentBigTime >= bigCountdown && spawnInterval > 1.5f)
-        {
-            spawnInterval -= .1f;
-            currentBigTime = 0;
-        }
-        //timer += Time.deltaTime;
-        //timer = 0f;
-        //if (GameController.Instance.IsPlaying())
-        //{
-        //}
+        
+        
     }
 
     
@@ -102,17 +88,6 @@ public class EnemySpawner : MonoBehaviour
                 break;
             }
         }
-        /*
-        for (int i = 0; i < noOfEnemies; i++)
-        {
-            float angle = Random.Range(0, 2 * Mathf.PI);
-            float radius = Random.Range(minSpawnRadius, maxSpawnRadius);
-            Vector3 pos = new Vector3(Mathf.Sin(angle) * radius, 2f, Mathf.Cos(angle) * radius);
-            //Vector3 pos = new Vector3(Mathf.Sin(angle) * radius, Mathf.Cos(angle) * radius, 0);
-            Enemy enemy = Instantiate(enemyPrefab, pos, enemyPrefab.transform.rotation);
-            enemy.transform.SetParent(enemyParent);
-        }
-        */
     }
 
     // Check Enemy position is within player bounds

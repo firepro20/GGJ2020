@@ -165,11 +165,13 @@ public class PlayerController : MonoBehaviour
                 // further steps need to be added when weapon powerup is picked, switch \ if clauses
                 if (frontTurret.gameObject.activeInHierarchy)
                     frontProjectile = Instantiate(frontShell, frontTurret.transform.position + (bulletOffset * frontTurret.transform.forward), frontTurret.transform.rotation);
+                    AudioController.Instance.PlayShot();
                 if (rearTurret.gameObject.activeInHierarchy)
                     rearProjectile = Instantiate(rearShell, rearTurret.transform.position + (bulletOffset * -rearTurret.transform.forward), rearTurret.transform.rotation);
+                    AudioController.Instance.PlayShot();
                 // We can now use GetTurretRotation() for the y value, the new angle. However we will need to specify the angle our selves.
                 nextFire = Time.time + 1 / rateOfFire;
-                AudioController.Instance.PlayShot();
+                
             }
         }
     }
