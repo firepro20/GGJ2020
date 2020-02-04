@@ -42,8 +42,8 @@ public class FrontShellController : MonoBehaviour
         // This is not a permanent solution as there may be times this will not work. To improve later
         if (!OnScreenCheck()) // we put this here as there was a bug were this was destroying object before instantiating, because
         {
-            DestroyShell();
-            //Destroy(gameObject, shellTTL);
+            //DestroyShell(); 
+            Destroy(gameObject, shellTTL); // do not play sound if off screen
         }   // render on camera is off before initiating.
 
 

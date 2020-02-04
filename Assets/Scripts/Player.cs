@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
     public GameObject[] carComponents;
     public TextMeshProUGUI componentsText;
 
+    private float componentTimer = 10.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +34,13 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //Take damage and lose component over time
+        componentTimer -= Time.deltaTime;
+        if (componentTimer <= 0)
+        {
+            TakeDamage();
+            componentTimer = 10.0f;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

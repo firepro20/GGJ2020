@@ -98,7 +98,7 @@ MonoBehaviour:
   shellExplosionSound: {fileID: 8300000, guid: 31bbf344e84ef4c4e9dbc7755efc1b2a, type: 3}
   shellSpeed: 40
   shellDamage: 1
-  shellTTL: 5
+  shellTTL: 4
 --- !u!54 &2310087740751065753
 Rigidbody:
   m_ObjectHideFlags: 0
