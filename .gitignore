@@ -9,6 +9,8 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
+/[Ww]ebRelease/
+/[Ww]inRelease/
 
 # Never ignore Asset meta data
 !/[Aa]ssets/**/*.meta

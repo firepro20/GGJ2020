@@ -75,7 +75,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5960584099322654604}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
