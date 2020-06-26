@@ -10,4 +10,7 @@
 - Loot spawn rate decreased from 8 to 4 pickups
 - Enemy bullet TTL decreased from 5 to 4 seconds
 
+# v1.02
 
+- Fixed player sound playback when firing with no turrets
+- Fixed rare bug with enemy spawning
